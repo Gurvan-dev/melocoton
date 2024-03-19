@@ -108,7 +108,7 @@ Proof.
   - eapply elem_of_weaken; first apply HB. done.
 Qed.
 
-Lemma extended_to_trans (χ1 χ2 χ3 : lloc_map) (ζ1 ζ2 : lstore) : 
+Lemma extended_to_trans (χ1 χ2 χ3 : lloc_map) (ζ1 ζ2 : lstore) :
   extended_to χ1 ζ1 χ2 →
   extended_to χ2 ζ2 χ3 →
   extended_to χ1 (ζ1 ∪ ζ2) χ3 /\ ζ1 ##ₘ ζ2.
@@ -124,7 +124,7 @@ Proof.
     eapply extended_to_dom_subset; done.
 Qed.
 
-Lemma extended_to_trans_2 (χ1 χ2 χ3 : lloc_map) (ζ1 ζ2 : lstore) : 
+Lemma extended_to_trans_2 (χ1 χ2 χ3 : lloc_map) (ζ1 ζ2 : lstore) :
   extended_to χ1 ζ1 χ2 →
   extended_to χ2 ζ2 χ3 →
   extended_to χ1 (ζ2 ∪ ζ1) χ3 /\ ζ1 ##ₘ ζ2.
@@ -159,7 +159,7 @@ Proof.
   apply map_union_subseteq_l.
 Qed.
 
-Lemma deserialize_ML_value χMLold v :  
+Lemma deserialize_ML_value χMLold v :
   lloc_map_inj χMLold
 → ∃ χC ζimm lv,
     extended_to χMLold ζimm χC
@@ -213,7 +213,7 @@ Proof.
     + eapply is_val_extended_to_weaken; done.
 Qed.
 
-Lemma deserialize_ML_values χMLold vs :  
+Lemma deserialize_ML_values χMLold vs :
   lloc_map_inj χMLold
 → ∃ χC ζimm lvs,
     extended_to χMLold ζimm χC
@@ -232,7 +232,7 @@ Proof.
       eapply map_union_subseteq_r, extended_to_trans; done.
 Qed.
 
-Lemma deserialize_ML_block χMLold vs :  
+Lemma deserialize_ML_block χMLold vs :
   lloc_map_inj χMLold
 → ∃ χC ζimm blk,
     extended_to χMLold ζimm χC
@@ -288,7 +288,7 @@ Proof.
   1: apply H2. 1-2:done.
 Qed.
 
-Lemma deserialize_ML_heap χMLold σ : 
+Lemma deserialize_ML_heap χMLold σ :
   lloc_map_inj χMLold
 → ∃ χC ζσ ζnewimm,
     extended_to χMLold ζnewimm χC
@@ -385,7 +385,7 @@ Proof.
       rewrite <- Hk1. f_equal. eapply Hχ1; try done. eapply lookup_weaken, Hχ1; done.
 Qed.
 
-Lemma deserialize_ML_heap_extra ζMLold χMLold σ : 
+Lemma deserialize_ML_heap_extra ζMLold χMLold σ :
   lloc_map_inj χMLold
 → dom ζMLold ⊆ dom χMLold
 → (map_Forall (fun _ ℓ => σ !! ℓ = Some None) (pub_locs_in_lstore χMLold ζMLold))
@@ -405,7 +405,7 @@ Proof.
        erewrite (map_Forall_lookup_1 _ _ _ _ H3) in HH8.
        2: { eapply elem_of_dom_2 in HH1. erewrite pub_locs_in_lstore_lookup; first done; first done.
             eapply elem_of_weaken in H2; last done.
-            eapply elem_of_dom in H2; destruct H2 as [k Hk]. rewrite Hk. 
+            eapply elem_of_dom in H2; destruct H2 as [k Hk]. rewrite Hk.
             eapply lookup_weaken in Hk; first erewrite HH7 in Hk. 2: eapply HA1. done. }
        congruence. }
   do 3 eexists; split_and!; try done.

@@ -2,13 +2,13 @@
 
 All paths are relative to the `theories/` directory.
 
-General notes: 
+General notes:
 - Hoare-triples shown in the paper will sometimes omit "later" modalities (▷)
   that appear in front of *preconditions* of the Coq version. Later modalities
   in preconditions make the Coq statement *slightly stronger* than the paper
   version. In other words, omitting the "later" on paper is sound, and the
   on-paper rule is a *consequence* of the corresponding rule in Coq.
-- The syntax `"foo_name" ∷ foo` is equivalent to `foo`. The extra string is 
+- The syntax `"foo_name" ∷ foo` is equivalent to `foo`. The extra string is
   a naming hint for tactics and has no semantic meaning.
 - The Coq scripts sometimes formulate rules in terms of weakest-preconditions
   (`WP e {{ Q }}`) where the paper uses Hoare-triples (`{ P } e { Q }`). To help
@@ -108,7 +108,7 @@ Section 3:
 - Small-step operational semantics of λML appear in `ml_lang/lang.v` (`head_step`)
 - Small-step operational semantics of λC appear in `c_lang/lang.v` (`head_step`)
 - The linking operational semantics appear in `linking/lang.v` (`prim_step_mrel`)
-- The wrapper operational semantics appear in `interop/lang.v` 
+- The wrapper operational semantics appear in `interop/lang.v`
   (`prim_step_mrel`, using `c_prim_step` as an auxiliary definition)
 - [e]_FFI (as a program) is `wrap_prog` defined in `interop/lang.v`
 - Linking of two programs is `link_prog` defined in `linking/lang.v`

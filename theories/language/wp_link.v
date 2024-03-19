@@ -51,7 +51,7 @@ Proof.
 Qed.
 
 Lemma union_map_list_spec x y (P:list (lang_prog Λ)) :
-  (pairwise P (fun p1 p2 => dom p1 ## dom p2)) -> 
+  (pairwise P (fun p1 p2 => dom p1 ## dom p2)) ->
   ((union_map_list P) !! x = Some y <-> ∃ k, In k P ∧ k !! x = Some y).
 Proof.
   intros Hdis.
@@ -83,7 +83,7 @@ Proof.
       apply IHP in H; last by eapply pairwise_subset. congruence.
 Qed.
 
-Lemma union_map_subset A p : 
+Lemma union_map_subset A p :
   (pairwise A (fun p1 p2 => dom p1 ## dom p2)) -> p ∈ A → p ⊆ union_map_list A.
 Proof.
   intros Hdis H. apply map_subseteq_spec.
@@ -134,7 +134,7 @@ Qed.
 
 Lemma wp_link_execs Ψaxiom Ψres (pres : gmap string (Λ.(func))) A :
   can_link_all Ψaxiom Ψres pres A
-  -> ⊢ ∀ e Φ i, match (nth_error A i) with None => ⌜False⌝ | 
+  -> ⊢ ∀ e Φ i, match (nth_error A i) with None => ⌜False⌝ |
           Some (Ψi, pi) => WP e at ⟨pi, (spec_union_list_except i (map fst A)) ⊔ Ψaxiom ⟩ {{ Φ }} end
      -∗ WP e at ⟨pres, Ψaxiom⟩ {{ Φ }}.
 Proof.

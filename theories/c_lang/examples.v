@@ -10,20 +10,20 @@ Import uPred.
 Section examples.
 Context `{SI:indexT}.
 Context `{!heapG_C Σ, !invG Σ}.
- 
+
 Fixpoint fib (n:nat) : nat := match n with
   0 => 0
-| S n' => match n' with 
+| S n' => match n' with
       0 => 1
     | S n'' => fib n' + fib n'' end end.
 
 Definition fib_prog name (x:expr) : expr :=
-(if: "x" < #2 
+(if: "x" < #2
  then "x"
  else (call: (&name) with ("x" - #1)) + (call: (&name) with ("x" - #2) )).
 
 Definition heap_example : expr :=
-  let: "x" := malloc (#2) in 
+  let: "x" := malloc (#2) in
  (call: &"store_it" with (("x" +ₗ #1), call: &"fib_left" with ( Val (#3) )) ;;
  ("x" +ₗ #0) <- #1337 ;;
   let: "y" := *("x" +ₗ #1) in
@@ -185,7 +185,7 @@ Proof.
   assert (
     ((<["fib_right":=fib_func "fib_left"]> (<["fib_left":=fib_func "fib_right"]> ∅)))
   = (union_with (λ _ _ : func C_lang, None) (exampleProgram "fib_left" "fib_right") (exampleProgram "fib_right" "fib_left"))) as Heq.
-  { apply map_eq_iff. intros i. 
+  { apply map_eq_iff. intros i.
     destruct (decide (i = "fib_right")) as [-> | Hno].
     1: done.
     destruct (decide (i = "fib_left")) as [-> | Hno2].

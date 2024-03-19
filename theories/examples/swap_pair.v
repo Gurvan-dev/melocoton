@@ -147,7 +147,7 @@ Import melocoton.ml_lang.proofmode.
   Context `{!logrelG Σ}.
   Context (A B : type).
 
-  Definition program_type_ctx : program_env := 
+  Definition program_type_ctx : program_env :=
     {[ "swap_pair" := FunType [ TProd A B ] (TProd B A) ]}.
 
   Lemma swap_pair_well_typed Δ : ⊢ ⟦ program_type_ctx ⟧ₚ* ⟨∅, swap_pair_ml_spec⟩ Δ.

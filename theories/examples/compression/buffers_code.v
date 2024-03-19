@@ -18,9 +18,9 @@ Section C_code.
 (** See [buffers_specs] for more information about the in-memory layout of buffers. *)
 
 Definition buf_alloc_code (cap : expr) : expr :=
-  CAMLlocal: "bk" in 
-  CAMLlocal: "bf" in 
-  CAMLlocal: "bf2" in 
+  CAMLlocal: "bk" in
+  CAMLlocal: "bf" in
+  CAMLlocal: "bf2" in
   "bk" <- caml_alloc_custom ( ) ;;
   (Custom_contents ( *"bk" ) :=  malloc(Int_val (cap))) ;;
   "bf"    <- caml_alloc (#2, #0) ;;

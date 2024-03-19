@@ -29,7 +29,7 @@ Section ToMlang.
 
   Notation cont := Λ.(ectx).
 
-  Definition is_call (e : Λ.(expr)) (s : string) (vs : list val) (C : cont) : Prop := 
+  Definition is_call (e : Λ.(expr)) (s : string) (vs : list val) (C : cont) : Prop :=
     e = fill C (of_class Λ (ExprCall s vs)).
 
   Definition to_call (s : string) (vs : list val) : Λ.(expr) :=

@@ -28,7 +28,7 @@ Global Program Instance lang_to_mlang_linkableG :
   (@linkableG _ _ _ (lang_to_mlang Λ) _ _ (lang_to_mlang_linkable Λ) state_interp)%I
 := {
   private_state_interp := (λ _, True)%I;
-}. 
+}.
 Next Obligation. simpl. intros *. inversion 1. iIntros "?". by iFrame. Qed.
 Next Obligation.
   simpl. intros ? []. iIntros "? _". iModIntro. iExists _. by iFrame.

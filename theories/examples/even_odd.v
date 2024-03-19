@@ -89,7 +89,7 @@ Proof.
   unfold progwp, is_odd_proto.
   iIntros (? ? ?) "H". iNamedProto "H". iSplit; first done.
   iIntros (?) "Hcont". wp_call_direct.
-  iApply wp_wand; first by iApply wp_is_odd. iIntros (? ->). 
+  iApply wp_wand; first by iApply wp_is_odd. iIntros (? ->).
   iApply "Hcont". by iApply "Cont".
 Qed.
 

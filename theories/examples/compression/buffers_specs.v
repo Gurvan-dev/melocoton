@@ -58,7 +58,7 @@ Section Specs.
   Context `{!heapG_C Σ, !heapG_ML Σ, !invG Σ, !primitive_laws.heapG_ML Σ, !wrapperG Σ}.
 
   Definition isBufferForeignBlock (γ : lloc) (ℓbuf : loc) (Pb : list (option Z) → iProp Σ) cap : iProp Σ :=
-      ∃ vcontent, 
+      ∃ vcontent,
         "Hγfgnpto" ∷ γ ↦foreign (#ℓbuf)%CV
       ∗ "Hℓbuf" ∷ ℓbuf ↦C∗ (map (option_map (λ (z:Z), #z)) vcontent)
       ∗ "HContent" ∷ Pb vcontent
@@ -122,7 +122,7 @@ Section Specs.
     ∗ "%Hb3" ∷ ⌜j < cap⌝%Z
     ∗ "#HMerge" ∷ (□ ∀ z vnew, ⌜i ≤ z⌝%Z -∗ ⌜z ≤ j⌝%Z -∗ Ψframe (z+1)%Z -∗ Φz z vnew -∗
           isBufferRecordML vbuf ℓbuf (buf_alloc1_spec z vnew (Pb z)) cap ==∗ Ψ (z+1)%Z)
-    ∗ "#HWP" ∷ (□ ▷ ∀ z, ⌜i ≤ z⌝%Z -∗ ⌜z ≤ j⌝%Z -∗ Ψ z -∗ 
+    ∗ "#HWP" ∷ (□ ▷ ∀ z, ⌜i ≤ z⌝%Z -∗ ⌜z ≤ j⌝%Z -∗ Ψ z -∗
               WP (RecV b1 b2 F) #z at ⟨ ∅, protoCB ⟩
               {{res, ∃ (znew:Z), ⌜res = #znew⌝ ∗ Φz z znew ∗ Ψframe (z+1)%Z
                                ∗ isBufferRecordML vbuf ℓbuf (Pb (z)%Z) cap}})
@@ -145,7 +145,7 @@ Section Specs.
     ∗ "HBuf1" ∷ isBufferRecordML v1 ℓ1 (λ z vb, ⌜vb = map Some vcompress ++ vrest1⌝ ∗ ⌜length vcompress = z⌝ ∗ Pb1 z vb) cap1
     ∗ "HBuf2" ∷ isBufferRecordML v2 ℓ2 Pb2 cap2
     ∗ "HCont" ∷ ▷   ( isBufferRecordML v1 ℓ1 (λ z vb, ⌜vb = map Some vcompress ++ vrest1⌝ ∗ ⌜length vcompress = z⌝ ∗ Pb1 z vb) cap1
-                   -∗ isBufferRecordML v2 ℓ2 (λ z vb, ∃ vov vrest zold, ⌜vb = map Some (compress_buffer vcompress) ++ vrest⌝  
+                   -∗ isBufferRecordML v2 ℓ2 (λ z vb, ∃ vov vrest zold, ⌜vb = map Some (compress_buffer vcompress) ++ vrest⌝
                                                       ∗ ⌜length (compress_buffer vcompress) = z⌝ ∗ ⌜length vov = z⌝
                                                       ∗ Pb2 zold (vov ++ vrest)) cap2
                    -∗ Φ #true).

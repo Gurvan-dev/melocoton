@@ -16,13 +16,13 @@ Ltac solve_lookup_fixed := let rec go := match goal with
   [ |- context[ @lookup _ _ (@gmap _ ?eqdec _ _) _ ?needle (insert ?key ?val ?rem)]] =>
     (unify key needle; rewrite (@lookup_insert _ _ _ _ _ _ _ _ _ _ _ _ rem key val)) ||
     (rewrite (@lookup_insert_ne _ _ _ _ _ _ _ _ _ _ _ _ rem key needle val); [congruence|go])
-| [ |- context[ @lookup _ _ (@gmap _ ?eqdec _ _) _ ?needle (delete ?key ?rem)]] => 
+| [ |- context[ @lookup _ _ (@gmap _ ?eqdec _ _) _ ?needle (delete ?key ?rem)]] =>
       (unify key needle; rewrite (@lookup_delete _ _ _ _ _ _ _ _ _ _ _ _ rem key)) ||
       (rewrite (@lookup_delete_ne _ _ _ _ _ _ _ _ _ _ _ _ rem key needle); [go|congruence])
 | [ |- context[ @lookup _ _ (@gmap _ ?eqdec _ _) _ ?needle (singletonM ?key ?val)]] =>
     (unify key needle; rewrite (@lookup_singleton _ _ _ _ _ _ _ _ _ _ _ _ key val)) ||
     (rewrite (@lookup_singleton_ne _ _ _ _ _ _ _ _ _ _ _ _ key needle val); congruence)
-| [ |- context[ @lookup _ _ (@gmap _ ?eqdec _ _) _ ?needle ∅]] => 
+| [ |- context[ @lookup _ _ (@gmap _ ?eqdec _ _) _ ?needle ∅]] =>
     rewrite (@lookup_empty _ _  _ _ _ _ _ _ _ _ _ _ needle) end in repeat (progress (unfold subst; try go; cbn)).
 
 Tactic Notation "wp_expr_eval" tactic3(t) :=
@@ -153,7 +153,7 @@ Lemma tac_wp_call `{SI:indexT} `{!heapG_ML Σ, !invG Σ} Δ s E Φ fn vv e1 :
 Proof.
   intros ->.
   rewrite envs_entails_unseal=> Hyp. iIntros "H".
-  iApply (wp_call s fn vv E Φ). by iApply Hyp. 
+  iApply (wp_call s fn vv E Φ). by iApply Hyp.
 Qed.
 
 Tactic Notation "wp_call" :=
@@ -177,7 +177,7 @@ Tactic Notation "wp_extern" :=
   lazymatch goal with
   | |- envs_entails _ (wp ?s ?E ?e ?Q) =>
     let e := eval simpl in e in
-    reshape_expr e ltac:(fun K e' => match e' with Extern (?s) (map Val ?vv) => 
+    reshape_expr e ltac:(fun K e' => match e' with Extern (?s) (map Val ?vv) =>
       iApply (@wp_extern _ _ ML_lang _ _ _ K _ s vv); [try (iPureIntro; vm_compute; reflexivity) | ] end)
     || fail "wp_extern: expression not a call"
   | _ => fail "wp_extern: not a 'wp'"

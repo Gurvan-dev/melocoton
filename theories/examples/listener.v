@@ -195,7 +195,7 @@ Section Proofs.
       iApply "Cont2". iApply ("Return" with "HGC [Cont Hna] [] []").
       1: by iApply "Cont". 1,2: by iPureIntro.
     - wp_apply (wp_load with "[$Hnull]"). iIntros "Hnull".
-      wp_pures. 
+      wp_pures.
       iMod ("Hclose" with "[$Hna Hnull]") as "Hna".
       { iNext. iRight. iFrame. }
       wp_apply (wp_int2val with "HGC"); [done..|].
@@ -350,7 +350,7 @@ Section Proofs.
                                                          (λ: "v1" "v2", extern: "listener_listen" with ("v1", "v2")),
                                                          (λ: "v1", extern: "listener_unlisten" with ("v1"))).
 
-  
+
   Definition ML_type_inner (t:type) : type :=
     (TProd (TProd (TProd
        (* unit -> 'a listener *)
@@ -422,7 +422,7 @@ Section Proofs.
     let: <> := Snd (Fst "l") (λ: "v", Snd (Fst (Fst "l")) (#1) "ml") "ml" in
     #42.
 
-  Lemma listener_client_1_typed : 
+  Lemma listener_client_1_typed :
     typed ∅ ∅ listener_client_1 (TArrow ML_type TNat).
   Proof.
     econstructor; cbn in *.
@@ -446,7 +446,7 @@ Section Proofs.
 End Proofs.
 
 
-Lemma listener_client_1_adequacy : 
+Lemma listener_client_1_adequacy :
 umrel.trace (mlanguage.prim_step (combined_prog listener_client listener_prog))
   (LkCall "main" [], adequacy.σ_init)
   (λ '(e, σ), ∃ x, mlanguage.to_val e = Some (code_int x) ∧ True).

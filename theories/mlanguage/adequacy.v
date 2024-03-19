@@ -28,7 +28,7 @@ Section Adequacy.
   Implicit Types e : expr Λ.
   Implicit Types X : cfg → Prop.
 
-  Definition sideConds `{!invG Σ, !mlangG val Λ Σ} : iProp Σ := 
+  Definition sideConds `{!invG Σ, !mlangG val Λ Σ} : iProp Σ :=
     □ (∀ σ v, state_interp σ ∗ Φbi v ==∗ ⌜Φpure σ v⌝)
   ∗ □ (∀ f s vv, penv_proto ⟪p,Ψ⟫ f s vv -∗ False).
 

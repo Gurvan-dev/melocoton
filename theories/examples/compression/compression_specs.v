@@ -23,7 +23,7 @@ Definition buffy_compress_code (inbuf inlen outbuf outlenp:expr) := (
   if: *outlenp < call: &buffy_max_len_name with (inlen) then #1 else
     (outlenp <- call: &buffy_compress_rec_name with (inbuf, inlen, outbuf)) ;; #0 )%CE.
 
-Definition buffy_env : gmap string function := 
+Definition buffy_env : gmap string function :=
   <[buffy_max_len_name      := Fun [BNamed "len"] (buffy_max_len_code "len")]> (
   <[buffy_compress_rec_name := Fun [BNamed "inbuf"; BNamed "inlen"; BNamed "outbuf"] (buffy_compress_rec_code "inbuf" "inlen" "outbuf")]> (
   <[buffy_compress_name     := Fun [BNamed "inbuf"; BNamed "inlen"; BNamed "outbuf"; BNamed "outlenp"]
@@ -59,7 +59,7 @@ Definition buffy_compress_spec_ok : protocol val Σ := (λ s vv Φ,
       -∗ ⌜vspace = voverwritten ++ vrest⌝
       -∗ ⌜length voverwritten = length vout⌝
       -∗ ℓout ↦C∗ (vout ++ vrest)
-      -∗ ℓin  ↦C∗ vin 
+      -∗ ℓin  ↦C∗ vin
       -∗ ℓlen ↦C  #(length vout)
       -∗ Φ #0))%I.
 

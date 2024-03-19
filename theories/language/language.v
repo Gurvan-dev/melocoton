@@ -189,11 +189,11 @@ Section language.
   Lemma head_ctx_step_val' p K e σ1 e2 σ2 :
     head_step p (fill K e) σ1 e2 σ2 → K = empty_ectx ∨ ∃ v, to_class e = Some (ExprVal v).
   Proof. apply language_mixin. Qed.
-  Lemma call_in_ctx K K' e s' vv : 
+  Lemma call_in_ctx K K' e s' vv :
       fill K e = fill K' (of_class _ (ExprCall s' vv))
       → (∃ K'', K' = comp_ectx K K'') ∨ (∃ v, of_class _ (ExprVal v) = e).
   Proof. apply language_mixin. Qed.
-  Lemma call_in_ctx_to_val K K' e s' vv : 
+  Lemma call_in_ctx_to_val K K' e s' vv :
       fill K e = fill K' (of_class _ (ExprCall s' vv))
       → (∃ K'', K' = comp_ectx K K'') ∨ is_Some (to_val e).
   Proof.
@@ -340,7 +340,7 @@ Section language.
   Proof. intros (?&?&?); eauto using val_stuck. Qed.
   Lemma val_irreducible p e σ : is_Some (to_val e) → irreducible p e σ.
   Proof. intros [??] ?? ?%val_stuck. by destruct (to_val e). Qed.
-  Global Instance of_val_inj : Inj (=) (=) (@of_val _ Λ). 
+  Global Instance of_val_inj : Inj (=) (=) (@of_val _ Λ).
   Proof. by intros v v' Hv; apply (inj Some); rewrite -!to_of_val Hv. Qed.
   Lemma not_not_stuck p e σ : ¬not_stuck p e σ ↔ stuck p e σ.
   Proof.
@@ -460,8 +460,8 @@ Section language.
     - apply of_to_class in Heq. subst e1'. apply call_head_step in H.
       destruct H as (Fn & HFn & Happly & ->).
       apply call_head_step. exists Fn. repeat split; try done.
-      eapply lookup_weaken; done. 
-    - eapply head_step_no_call; done. 
+      eapply lookup_weaken; done.
+    - eapply head_step_no_call; done.
   Qed.
 
   Lemma fill_stuck (P : prog Λ) e σ K : stuck P e σ → stuck P (fill K e) σ.

@@ -54,7 +54,7 @@ Lemma is_closed_weaken X Y e : is_closed_expr X e → X ⊆ Y → is_closed_expr
 Proof. revert X Y; induction e; try naive_solver (eauto; set_solver).
        + cbn. intros X Y H2%forallb_True HXY.
          apply forallb_True, Forall_forall. intros x Hx.
-         rewrite List.Forall_forall in H. apply H with X. 
+         rewrite List.Forall_forall in H. apply H with X.
          3: assumption. 1: now apply elem_of_list_In. rewrite Forall_forall in H2. now apply H2.
 Qed.
 
@@ -204,12 +204,12 @@ Lemma subst_rec' f y e x v :
   x = f ∨ x = y ∨ x = BAnon →
   subst' x v (Rec f y e) = Rec f y e.
 Proof. intros. destruct x; simplify_option_eq; try naive_solver. cbn. f_equal.
-  destruct H as [<-|[<-|H3]]. 
+  destruct H as [<-|[<-|H3]].
   - cbn. destruct y; cbn. all: rewrite <- subst_all_empty; f_equal.
     1: now rewrite delete_singleton. now  rewrite delete_commute delete_singleton delete_empty.
   - cbn. rewrite delete_singleton. destruct f; cbn; try rewrite delete_empty.
     all: apply subst_all_empty.
-  - congruence. 
+  - congruence.
 Qed.
 (*
 Lemma subst_rec_ne' f y e x v :
@@ -226,7 +226,7 @@ Proof.
 Qed.
 
 Definition is_closed_ml_function X f := match f with
-  MlFun lst expr => is_closed_expr (X ∪ list_to_set 
+  MlFun lst expr => is_closed_expr (X ∪ list_to_set
         (flat_map (fun k => match k with BAnon => [] | BNamed l => [l] end) lst)) expr end.
 
 Lemma zip_args_closed a b c : zip_args a b = Some c -> Forall is_closed_val b -> is_closed_context c.
@@ -237,7 +237,7 @@ Proof.
   - destruct a as [|[|x] ar]; cbn in *; try congruence.
     + eapply IHb. 1: apply H1. eapply Forall_inv_tail, H2.
     + destruct (zip_args ar b) eqn:Heq; cbn in H1; try congruence.
-      injection H1. intros <-. apply map_Forall_insert_2. 
+      injection H1. intros <-. apply map_Forall_insert_2.
       1: now apply Forall_inv in H2.
       1: eapply IHb. 1: apply Heq. eapply Forall_inv_tail, H2.
 Qed.
@@ -282,10 +282,10 @@ Proof.
     eapply Happ, Clp.
     clear Happ H.
     induction args as [|[|a] ar IH] in Heq,va,σ'|-*; cbn; destruct va; cbn in *; try congruence.
-    + injection Heq. intros <-. set_solver. 
+    + injection Heq. intros <-. set_solver.
     + eapply IH. apply Heq.
     + unfold option_map in Heq. specialize (IH va). destruct (zip_args ar va) as [σ''|] eqn:Heq2; last congruence.
-      specialize (IH σ'' eq_refl). 
+      specialize (IH σ'' eq_refl).
       injection Heq. intros <-. set_solver.
 Qed.
 

@@ -86,21 +86,21 @@ with val :=
 Scheme val_ind := Induction for val Sort Prop.
 Scheme val_rec := Induction for val Sort Type.
 
-Definition expr_ind (P : expr → Prop) 
+Definition expr_ind (P : expr → Prop)
   (f : ∀ v : val, P (Val v))
-  (f0 : ∀ x : string, P (Var x)) 
-  (f1 : ∀ (f1 x : binder) (e : expr), P e → P (Rec f1 x e)) 
-  (f2 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (App e1 e2)) 
-  (f3 : ∀ (op : un_op) (e : expr), P e → P (UnOp op e)) 
+  (f0 : ∀ x : string, P (Var x))
+  (f1 : ∀ (f1 x : binder) (e : expr), P e → P (Rec f1 x e))
+  (f2 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (App e1 e2))
+  (f3 : ∀ (op : un_op) (e : expr), P e → P (UnOp op e))
   (f4 : ∀ (op : bin_op) (e1 : expr),
-          P e1 → ∀ e2 : expr, P e2 → P (BinOp op e1 e2)) 
+          P e1 → ∀ e2 : expr, P e2 → P (BinOp op e1 e2))
   (f5 : ∀ e0 : expr,
-          P e0 → ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (If e0 e1 e2)) 
-  (f6 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (Pair e1 e2)) 
-  (f7 : ∀ e : expr, P e → P (Fst e)) (f8 : ∀ e : expr, P e → P (Snd e)) 
-  (f9 : ∀ e : expr, P e → P (InjL e)) (f10 : ∀ e : expr, P e → P (InjR e)) 
+          P e0 → ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (If e0 e1 e2))
+  (f6 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (Pair e1 e2))
+  (f7 : ∀ e : expr, P e → P (Fst e)) (f8 : ∀ e : expr, P e → P (Snd e))
+  (f9 : ∀ e : expr, P e → P (InjL e)) (f10 : ∀ e : expr, P e → P (InjR e))
   (f11 : ∀ e0 : expr,
-           P e0 → ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (Case e0 e1 e2)) 
+           P e0 → ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (Case e0 e1 e2))
   (f12 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (AllocN e1 e2))
   (f14 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → P (LoadN e1 e2))
   (f15 : ∀ e1 : expr, P e1 → ∀ e2 : expr, P e2 → ∀ e3 : expr, P e3 → P (StoreN e1 e2 e3))
@@ -329,7 +329,7 @@ Proof.
         cast_if_and3 (decide (e1 = e1')) (decide (e2 = e2')) (decide (e3 = e3'))
      | Length e, Length e' =>
         cast_if (decide (e = e'))
-     | Extern x e, Extern x' e' => 
+     | Extern x e, Extern x' e' =>
         let gol := (fix gol (l1 l2 : list expr) {struct l1} : Decision (l1 = l2) :=
                        match l1, l2 with
                        | nil, nil => left eq_refl
@@ -382,7 +382,7 @@ Proof.
         cast_if_and3 (decide (e1 = e1')) (decide (e2 = e2')) (decide (e3 = e3'))
      | Length e, Length e' =>
         cast_if (decide (e = e'))
-     | Extern x e, Extern x' e' => 
+     | Extern x e, Extern x' e' =>
         let gol := (fix gol (l1 l2 : list expr) {struct l1} : Decision (l1 = l2) :=
                        match l1, l2 with
                        | nil, nil => left eq_refl

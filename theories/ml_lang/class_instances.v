@@ -92,7 +92,7 @@ Section pure_exec.
   Global Instance pure_case_inr v e1 e2 :
     PureExec True 1 p (Case (Val $ InjRV v) e1 e2) (App e2 (Val v)).
   Proof. solve_pure_exec. Qed.
-  Global Instance pure_funcall s va f res : 
+  Global Instance pure_funcall s va f res :
     PureExec ((p : gmap.gmap string ml_function) !! s = Some f ∧ apply_function f va = Some res) 1 p (Extern s (map Val va)) res.
   Proof. destruct f.
          subst; intros ?; apply nsteps_once, pure_head_step_pure_step;

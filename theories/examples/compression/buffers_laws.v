@@ -48,7 +48,7 @@ Section Specs.
     iMod (ml_to_mut with "[$HGC $HℓbufML]") as "(HGC&(%ℓvs&%γref2&Hγusedref&#Hsim2&#Hγrefsim))".
     iPoseProof (lloc_own_pub_inj with "Hsim2 Hsim") as "%Hiff".
     destruct Hiff as [_ ->]; last done.
-    iModIntro. iFrame "HGC". iSplit; last by repeat iExists _. 
+    iModIntro. iFrame "HGC". iSplit; last by repeat iExists _.
     iExists _, _, _, _, _. unfold named.
     iSplit; first done.
     iFrame "Hγbuf". iFrame "Hγaux".

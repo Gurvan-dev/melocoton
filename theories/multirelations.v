@@ -198,7 +198,7 @@ Inductive star_mrel_AD {A} (M : umrel A) : A → (A → Prop) → Prop :=
   | star_step_AD x X :
     (∀ Y, M x Y → ∃ y, Y y ∧ star_mrel_AD M y X) →
     star_mrel_AD M x X.
-Lemma star_mrel_AD_ind {A:Type} (M : umrel A) (P : A → (A → Prop) → Prop) : 
+Lemma star_mrel_AD_ind {A:Type} (M : umrel A) (P : A → (A → Prop) → Prop) :
   (∀ x(X:A→Prop), X x → P x X) →
   (∀ x X, (∀ Y, M x Y → ∃ y, Y y ∧ star_mrel_AD M y X ∧ P y X) → P x X) →
   ∀ y Y, star_mrel_AD M y Y → P y Y.

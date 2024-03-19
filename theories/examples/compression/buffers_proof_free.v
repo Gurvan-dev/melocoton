@@ -46,7 +46,7 @@ Section Proofs.
     wp_apply (wp_val2int with "HGC"); [done..|].
     iIntros "HGC". wp_pure _.
     wp_pure _; first by destruct ℓ. do 2 wp_pure _.
-    replace (length vcontent) with 
+    replace (length vcontent) with
       (length (map (option_map (λ z : Z, #z)) vcontent)) by by rewrite map_length.
     wp_apply (wp_free_array with "Hℓbuf"). iIntros "_".
     wp_pure _.

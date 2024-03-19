@@ -33,7 +33,7 @@ Notation na_tok := (na_own logrel_nais ⊤).
 
 Section logrel.
   Context `{SI: indexT}.
-  Context {Σ : gFunctors}. 
+  Context {Σ : gFunctors}.
   Context `{!heapG_ML Σ, !invG Σ, !logrelG Σ}.
   Notation D := (persistent_predO val (iPropI Σ)).
   Implicit Types τi : D.
@@ -109,7 +109,7 @@ Section logrel.
     intros interp n Δ1 Δ2 HΔ; apply fixpoint_ne => τi w. solve_proper.
   Qed.
 
-  Program Definition interp_array_inv_L γ (l : loc) : iPropO Σ := 
+  Program Definition interp_array_inv_L γ (l : loc) : iPropO Σ :=
     (∃ vs, l ↦∗ vs ∗ ghost_var γ (1/2) vs)%I.
   Program Definition interp_array_inv_R γ : D -n> iPropO Σ := λne τi,
     (∃ vs, ([∗ list] v∈vs, τi v) ∗ ghost_var γ (1/2) vs)%I.

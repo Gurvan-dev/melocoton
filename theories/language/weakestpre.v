@@ -171,7 +171,7 @@ Proof.
   iMod (fupd_mask_subseteq E1) as "Hclose"; first done.
   iMod "H".
   iDestruct "H" as "[(%x & -> & Hσ & H)|[(%s & %vv & %K & -> & %H2 & H3)|H3]]".
-  - iMod "Hclose". iLeft. iExists x. iFrame. iSplitR; first done. 
+  - iMod "Hclose". iLeft. iExists x. iFrame. iSplitR; first done.
     iApply ("HΦ" with "[> -]"). by iApply (fupd_mask_mono E1 _); first apply HE.
   - iRight; iLeft. iExists s, vv, K. iMod "H3". iMod "Hclose".
     iModIntro. iSplitR; first done. iSplitR; first (iPureIntro; congruence).
@@ -180,7 +180,7 @@ Proof.
     iExists Ξ. iFrame. iSplitL "HT"; first iApply (HΨ s vv with "HT").
     iNext. iIntros "%r HΞ". iApply ("IH" $! (fill K (of_class Λ (ExprVal r))) E1 E2 HE Φ Φ' with "[Hr HΞ] HΦ").
     iApply ("Hr" with "HΞ").
-  - do 2 iRight. 
+  - do 2 iRight.
     iDestruct "H3" as "(HH & H3)".
     iMod "Hclose". iFrame. iModIntro. iIntros "%σ2 %e' Hstep".
     iSpecialize ("H3" $! σ2 e' with "Hstep").
@@ -288,7 +288,7 @@ Proof.
   - rewrite {1} wp_unfold /wp_pre.
     iMod ("H" $! σ with "Hσ") as "H". iApply "H".
   - iMod "H3" as "(%Ξ & Hσ & HT & Hr)".
-    iModIntro. iRight. iLeft. iExists s, vv, (comp_ectx K K'). 
+    iModIntro. iRight. iLeft. iExists s, vv, (comp_ectx K K').
     iFrame. iSplitR.
     {iPureIntro. now rewrite fill_comp. }
     iModIntro. iExists Ξ. iFrame. iNext.

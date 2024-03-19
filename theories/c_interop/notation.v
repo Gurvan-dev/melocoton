@@ -36,7 +36,7 @@ Notation "'caml_alloc' '(' len ',' tag ')'" := (call: &"alloc" with (tag%CE, len
   (at level 70, len, tag at level 69,
   format "'caml_alloc' '(' len ','  tag ')'") : c_expr_scope.
 Notation "'caml_alloc_custom' '(' ')'" := (call: &"alloc_foreign" with ( ))%CE
-  (at level 70, 
+  (at level 70,
   format "'caml_alloc_custom' '(' ')'") : c_expr_scope.
 (* XXX maybe make this list-based? *)
 Definition CAMLunregister1 ek := (call: &"unregisterroot" with ( ek ) ;; free (ek%CE, #1))%CE.

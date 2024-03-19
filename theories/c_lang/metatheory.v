@@ -3,7 +3,7 @@ From melocoton.c_lang Require Export lang.
 From iris.prelude Require Import options.
 
 (* This file contains some metatheory about the heap_lang language,
-  which is not needed for verifying programs. *) 
+  which is not needed for verifying programs. *)
 
 (* Adding a binder to a set of identifiers. *)
 Local Definition set_binder_insert (x : binder) (X : stringset) : stringset :=
@@ -40,7 +40,7 @@ Proof.
   revert X Y; induction e; try naive_solver (eauto; set_solver).
   + cbn. intros X Y [H1 H2%forallb_True]%andb_True HXY. apply andb_True. split.
     - now apply IHe with X, HXY.
-    - apply forallb_True, Forall_forall. intros x Hx. apply H with X. 
+    - apply forallb_True, Forall_forall. intros x Hx. apply H with X.
       3: assumption. 1: now apply elem_of_list_In. rewrite Forall_forall in H2. now apply H2.
 Qed.
 
@@ -151,7 +151,7 @@ Lemma subst_subst_ne' e x y v v' :
 Proof. destruct x, y; simpl; auto using subst_subst_ne with congruence. Qed.
 
 Definition is_closed_function X f := match f with
-  Fun lst expr => is_closed_expr (X ∪ list_to_set 
+  Fun lst expr => is_closed_expr (X ∪ list_to_set
         (flat_map (fun k => match k with BAnon => [] | BNamed l => [l] end) lst)) expr end.
 
 (* The stepping relation preserves closedness *)
@@ -162,7 +162,7 @@ Lemma head_step_is_closed (p : gmap string function) e1 σ1 e2 σ2 :
   is_closed_expr ∅ e2.
 Proof.
   intros Clp Cl1 STEP.
-  induction STEP; simpl in *; 
+  induction STEP; simpl in *;
     try apply map_Forall_insert_2; try by naive_solver.
   - subst. repeat apply is_closed_subst'; naive_solver.
   - edestruct (zip_args args va) as [σ'|] eqn:Heq. 2: congruence.
@@ -174,10 +174,10 @@ Proof.
     eapply Happ, Clp.
     clear Happ H.
     induction args as [|[|a] ar IH] in Heq,va,σ'|-*; cbn; destruct va; cbn in *; try congruence.
-    + injection Heq. intros <-. set_solver. 
+    + injection Heq. intros <-. set_solver.
     + eapply IH. apply Heq.
     + unfold option_map in Heq. specialize (IH va). destruct (zip_args ar va) as [σ''|] eqn:Heq2; last congruence.
-      specialize (IH σ'' eq_refl). 
+      specialize (IH σ'' eq_refl).
       injection Heq. intros <-. set_solver.
 Qed.
 
@@ -266,7 +266,7 @@ Proof.
       intros ei Hin X0. apply H. now right.
 Qed.
 
-Lemma subst_all_free_irrel e g1 g2 : 
+Lemma subst_all_free_irrel e g1 g2 :
   (forall x, x ∈ free_vars e → g1 !! x = g2 !! x)
   → subst_all g1 e = subst_all g2 e.
 Proof.
@@ -292,7 +292,7 @@ Proof.
   - cbn. erewrite IHe1,IHe2,IHe3; first reflexivity. all: intros ? ?; set_solver.
   - cbn. erewrite IHe1,IHe2; first reflexivity. all: intros ? ?; set_solver.
   - cbn. erewrite IHe. 1: erewrite map_ext_in. 1:reflexivity. 2:intros ??; set_solver.
-    intros a Ha. apply H0. 1:easy. intros x Hx. apply H. cbn. 
+    intros a Ha. apply H0. 1:easy. intros x Hx. apply H. cbn.
     apply elem_of_union_r, elem_of_union_list. exists (free_vars a); split; last done.
     apply elem_of_list_In, in_map_iff. eexists; done.
 Qed.

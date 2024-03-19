@@ -73,11 +73,11 @@ Proof.
      | BinOp op0 e3 e4 => H9 op0 e3 (IH e3) e4 (IH e4)
      | If e3 e4 e5 =>  H10 e3 (IH e3) e4 (IH e4) e5 (IH e5)
      | While e2 e3 => H11 e2 (IH e2) e3 (IH e3)
-     | FunCall e1 ee0 => H12 e1 (IH e1) ee0 
+     | FunCall e1 ee0 => H12 e1 (IH e1) ee0
           ((fix IHl (ll:list expr) {struct ll} : forall (x:expr) (i:In2 x ll), P x :=
             match ll as ll0 return forall (x:expr) (i:In2 x ll0), P x
-            with nil => fun x i => False_rect _ i 
-            | ex::er => fun x i => match i with 
+            with nil => fun x i => False_rect _ i
+            | ex::er => fun x i => match i with
                                      inl H1 => match H1 in (_ = xe) return P xe with eq_refl => IH ex end
                                    | inr H2 => IHl er x H2 end end) ee0)
      end).
@@ -112,11 +112,11 @@ Proof.
      | BinOp op0 e3 e4 => H9 op0 e3 (IH e3) e4 (IH e4)
      | If e3 e4 e5 =>  H10 e3 (IH e3) e4 (IH e4) e5 (IH e5)
      | While e2 e3 => H11 e2 (IH e2) e3 (IH e3)
-     | FunCall e1 ee0 => H12 e1 (IH e1) ee0 
+     | FunCall e1 ee0 => H12 e1 (IH e1) ee0
           ((fix IHl (ll:list expr) {struct ll} : forall (x:expr) (i:In x ll), P x :=
             match ll as ll0 return forall (x:expr) (i:In x ll0), P x
-            with nil => fun x i => False_rect _ i 
-            | ex::er => fun x i => match i with 
+            with nil => fun x i => False_rect _ i
+            | ex::er => fun x i => match i with
                                      or_introl H1 => match H1 in (_ = xe) return P xe with eq_refl => IH ex end
                                    | or_intror H2 => IHl er x H2 end end) ee0)
      end).
@@ -152,11 +152,11 @@ Proof.
      | BinOp op0 e3 e4 => H9 op0 e3 (IH e3) e4 (IH e4)
      | If e3 e4 e5 =>  H10 e3 (IH e3) e4 (IH e4) e5 (IH e5)
      | While e2 e3 => H11 e2 (IH e2) e3 (IH e3)
-     | FunCall e1 ee0 => H12 e1 (IH e1) ee0 
+     | FunCall e1 ee0 => H12 e1 (IH e1) ee0
           ((fix IHl (ll:list expr) {struct ll} : forall (x:expr) (i:In x ll), P x :=
             match ll as ll0 return forall (x:expr) (i:In x ll0), P x
-            with nil => fun x i => False_rect _ i 
-            | ex::er => fun x i => match i with 
+            with nil => fun x i => False_rect _ i
+            | ex::er => fun x i => match i with
                                      or_introl H1 => match H1 in (_ = xe) return P xe with eq_refl => IH ex end
                                    | or_intror H2 => IHl er x H2 end end) ee0)
      end).
@@ -241,7 +241,7 @@ Proof.
         cast_if_and3 (decide (e0 = e0')) (decide (e1 = e1')) (decide (e2 = e2'))
      | While e1 e2, While e1' e2' =>
         cast_if_and (decide (e1 = e1')) (decide (e2 = e2'))
-     | FunCall x el, FunCall x' el' => 
+     | FunCall x el, FunCall x' el' =>
         let gol := (fix gol (l1 l2 : list expr) {struct l1} : Decision (l1 = l2) :=
                        match l1, l2 with
                        | nil, nil => left eq_refl
@@ -266,7 +266,7 @@ Proof.
  refine (inj_countable' (λ op, match op with
   | PlusOp => 0 | MinusOp => 1 | MultOp => 2 | QuotOp => 3 | RemOp => 4
   | AndOp => 5 | OrOp => 6 | XorOp => 7 | ShiftLOp => 8 | ShiftROp => 9
-  | LeOp => 10 | LtOp => 11 | EqOp => 12 | PtrOffsetOp => 13 | PtrDiffOp => 14 
+  | LeOp => 10 | LtOp => 11 | EqOp => 12 | PtrOffsetOp => 13 | PtrDiffOp => 14
   end) (λ n, match n with
   | 0 => PlusOp | 1 => MinusOp | 2 => MultOp | 3 => QuotOp | 4 => RemOp
   | 5 => AndOp | 6 => OrOp | 7 => XorOp | 8 => ShiftLOp | 9 => ShiftROp

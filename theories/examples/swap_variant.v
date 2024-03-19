@@ -168,7 +168,7 @@ Import melocoton.ml_lang.proofmode.
   Context `{!logrelG Σ}.
   Context (A B : type).
 
-  Definition program_type_ctx : program_env := 
+  Definition program_type_ctx : program_env :=
     {[ "swap_variant" := FunType [ TSum A B ] (TSum B A) ]}.
 
   Lemma swap_variant_well_typed Δ : ⊢ ⟦ program_type_ctx ⟧ₚ* ⟨∅, swap_variant_ml_spec⟩ Δ.

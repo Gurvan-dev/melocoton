@@ -117,7 +117,7 @@ Lemma mapsto_combine l dq1 dq2 v1 v2 :
 Proof.
   iIntros "Hl1 Hl2". iDestruct (mapsto_combine with "Hl1 Hl2") as "[$ Heq]".
   by iDestruct "Heq" as %[= ->].
-Qed. 
+Qed.
 
 Lemma mapsto_frac_ne l1 l2 dq1 dq2 v1 v2 :
   ¬ ✓(dq1 ⋅ dq2) → l1 ↦M{dq1} v1 -∗ l2 ↦M{dq2} v2 -∗ ⌜l1 ≠ l2⌝.
@@ -218,7 +218,7 @@ Proof.
   iIntros (v2 σ2 Hstep); inv_head_step. iModIntro.
   iMod (gen_heap_update with "Hσ Hl") as "[Hσ Hl]".
   rewrite (store_insert_offset _ _ _ vs); auto; [].
-  iModIntro. iFrame "Hσ". iApply "HΦ". iApply "Hl". 
+  iModIntro. iFrame "Hσ". iApply "HΦ". iApply "Hl".
 Qed.
 
 Lemma wp_storeN_oob pe E l i vs w :

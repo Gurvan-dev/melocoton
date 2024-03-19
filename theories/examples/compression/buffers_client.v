@@ -24,7 +24,7 @@ Section MLclient.
     penv_prog  := ∅ ;
     penv_proto := buf_library_spec_ML_pre Ψ |}.
 
-  Definition ML_client_code : MLval := 
+  Definition ML_client_code : MLval :=
     λ: "vbuf",
       let: "len"  := Length "vbuf" in
       if: "len" = #0 then #false else (
@@ -77,8 +77,8 @@ Section MLclient.
 
     wp_extern. iModIntro. do 4 iLeft; iRight.
 
-    pose (λ (idx:Z) (used:nat) (b : list (option Z)), 
-        ∃ zpre zopost zzpost, ⌜b = map Some zpre ++ zopost⌝ ∗ ⌜length zopost = length zzpost⌝ ∗ 
+    pose (λ (idx:Z) (used:nat) (b : list (option Z)),
+        ∃ zpre zopost zzpost, ⌜b = map Some zpre ++ zopost⌝ ∗ ⌜length zopost = length zzpost⌝ ∗
         ⌜zz = zpre ++ zzpost⌝ ∗ ⌜Z.of_nat used = idx⌝ ∗ ⌜Z.of_nat (length zpre) = idx⌝ : iProp Σ)%I as Hbufatidx.
 
     pose (λ (idx:Z), isBufferRecordML vin ℓinbuf (Hbufatidx idx) (length zz) ∗ (ℓ ↦∗{dq} map (λ x : Z, #x) zz))%I as Ψ'.
@@ -103,7 +103,7 @@ Section MLclient.
       apply Nat2Z.inj' in Heq2. subst n.
       destruct zzpost as [|vnew' zzpost].
       { exfalso. rewrite app_nil_r in Hz. apply lookup_lt_Some in Hz. lia. }
-      rewrite lookup_app_r in Hz; last lia. 
+      rewrite lookup_app_r in Hz; last lia.
       rewrite Nat.sub_diag in Hz. cbn in Hz. simplify_eq.
       destruct zopost as [|zoh zopost]; first done.
       iExists (zpre ++ [vnew]), zopost, zzpost.

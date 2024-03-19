@@ -202,7 +202,7 @@ Section typed_interp.
   Qed.
 
   (* TODO should go to stdpp *)
-  Lemma binder_delete_binder_delete {A} (b1:binder) (b2:binder) (m:gmap string A) : 
+  Lemma binder_delete_binder_delete {A} (b1:binder) (b2:binder) (m:gmap string A) :
     binder_delete b1 (binder_delete b2 m) = binder_delete b2 (binder_delete b1 m).
   Proof.
     destruct b1; cbn; try done.

@@ -366,7 +366,7 @@ Section Proofs.
     let: <> := Snd "box_abs" (λ: "v", Snd (Fst "box_abs") (#1) "mbox") "mbox" in
     #42.
 
-  Lemma box_client_1_typed : 
+  Lemma box_client_1_typed :
     typed ∅ ∅ box_client_1 (TArrow ML_type TNat).
   Proof.
     econstructor; cbn in *.
@@ -390,7 +390,7 @@ Section Proofs.
 End Proofs.
 
 
-Lemma box_client_1_adequacy : 
+Lemma box_client_1_adequacy :
 umrel.trace (mlanguage.prim_step (combined_prog box_client box_prog))
   (LkCall "main" [], adequacy.σ_init)
   (λ '(e, σ), ∃ x, mlanguage.to_val e = Some (code_int x) ∧ True).

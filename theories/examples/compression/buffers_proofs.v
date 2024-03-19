@@ -10,7 +10,7 @@ From melocoton.ml_lang Require Import notation lang_instantiation.
 From melocoton.c_lang Require Import lang_instantiation.
 From melocoton.ml_lang Require primitive_laws proofmode.
 From melocoton.c_lang Require Import notation proofmode derived_laws.
-From melocoton.examples.compression Require Import buffers_specs buffers_laws buffers_code 
+From melocoton.examples.compression Require Import buffers_specs buffers_laws buffers_code
   compression_specs compression_proofs
   buffers_proof_alloc buffers_proof_update buffers_proof_free buffers_proofs_compr
   buffers_proof_get.

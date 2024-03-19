@@ -51,7 +51,7 @@ Proof.
     rewrite Hl. unfold fill.
     rewrite foldl_snoc. cbn. intros H. pose proof H as H_copy.
     apply fill_item_no_val_inj in H_copy as ->.
-    2: easy. 
+    2: easy.
     2: { destruct (to_val (foldl (flip fill_item) e' L)) eqn:Heq; last done.
          edestruct (fill_val L e'). 1: eexists; apply Heq. congruence. }
     right. eexists. split; first done. now apply fill_item_inj in H.
