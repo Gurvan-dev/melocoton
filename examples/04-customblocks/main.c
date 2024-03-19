@@ -1,4 +1,3 @@
-#include <stdio.h>
 #define CAML_NAME_SPACE
 #include <caml/mlvalues.h>
 #include <caml/alloc.h>
@@ -8,14 +7,14 @@
 // NB: when custom, the functions provided below must never trigger a GC,
 // must not call back to ocaml code, and must not use CAMLparam/CAMLreturn
 static struct custom_operations caml_cpair_custom_ops = {
-  identifier: "caml_cpair",
-  finalize: custom_finalize_default,
-  compare: custom_compare_default, // always raises Failure
-  compare_ext: custom_compare_ext_default, // always raises Failure
-  hash: custom_hash_default, // ignores the content of the block
-  serialize: custom_serialize_default, // always raises Failure
-  deserialize: custom_deserialize_default, // always raises Failure
-  fixed_length: custom_fixed_length_default
+  .identifier = "caml_cpair",
+  .finalize = custom_finalize_default,
+  .compare = custom_compare_default, // always raises Failure
+  .compare_ext = custom_compare_ext_default, // always raises Failure
+  .hash = custom_hash_default, // ignores the content of the block
+  .serialize = custom_serialize_default, // always raises Failure
+  .deserialize = custom_deserialize_default, // always raises Failure
+  .fixed_length = custom_fixed_length_default
 };
 
 struct c_pair {
